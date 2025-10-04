@@ -26,13 +26,9 @@ def metadata():
 def static_mods(modname):
     return send_from_directory("mods", modname)
 
-@app.route("/app/win")
+@app.route("/app")
 def app_win():
     return send_from_directory("app", "modsync.exe")
-
-@app.route("/app/linux")
-def app_linux():
-    return send_from_directory("app", "modsync")
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
