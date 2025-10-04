@@ -6,15 +6,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 LOADER_ID = os.getenv('LOADER_ID')
-LOADER_DOWNLOAD = os.getenv('LOADER_DOWNLOAD')
-LOADER_NAME = os.getenv('LOADER_NAME')
+LOADER_CMD = os.getenv('LOADER_CMD')
 
 #Init Flask
 app = Flask(__name__)
 
 @app.route("/meta")
 def metadata():
-    response_body = f"{LOADER_ID}\n{LOADER_DOWNLOAD}\n{LOADER_NAME}\n"
+    response_body = f"{LOADER_ID}\n{LOADER_CMD}\n"
 
     for item in os.listdir("./mods"):
         if os.path.isfile("./mods/" + item):
@@ -28,7 +27,11 @@ def static_mods(modname):
 
 @app.route("/app")
 def app_win():
-    return send_from_directory("app", "modsync.exe")
+    return send_from_directory("static", "modsync.exe")
+
+@app.route("/loader")
+def loader():
+    return send_from_directory("static", "loader.jar")
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
