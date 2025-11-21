@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 @app.route("/meta")
 def metadata():
-    response_body = f"{LOADER_ID}\n{LOADER_CMD}\n"
+    response_body = f"LID{LOADER_ID}\nCMD{LOADER_CMD}\n"
 
     for item in os.listdir("./mods"):
         if os.path.isfile("./mods/" + item):
@@ -29,7 +29,7 @@ def static_mods(modname):
 def app_win():
     return send_from_directory("static", "modsync.exe")
 
-@app.route("/loader")
+@app.route("/loader.jar")
 def loader():
     return send_from_directory("static", "loader.jar")
 
