@@ -16,7 +16,9 @@ def metadata():
     response_body = f"LID{LOADER_ID}\nCMD{LOADER_CMD}\n"
 
     for item in os.listdir("./mods"):
-        if os.path.isfile("./mods/" + item):
+        if item[0] == '!':
+            print(item + "ignored!")
+        elif os.path.isfile("./mods/" + item):
             response_body += f"{item}\n"
     
     return Response(response_body, mimetype="text/plain")
@@ -27,7 +29,7 @@ def static_mods(modname):
 
 @app.route("/app")
 def app_win():
-    return send_from_directory("static", "modsync.exe")
+    return send_from_directory("static", "modsync.zip")
 
 @app.route("/loader.jar")
 def loader():
