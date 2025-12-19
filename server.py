@@ -27,7 +27,7 @@ def metadata():
 def static_mods(modname):
     return send_from_directory("mods", modname)
 
-@app.route("/app")
+@app.route("/")
 def app_win():
     return send_from_directory("static", "modsync.zip")
 
